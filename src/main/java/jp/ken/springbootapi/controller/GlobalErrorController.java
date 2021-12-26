@@ -1,5 +1,6 @@
 package jp.ken.springbootapi.controller;
 
+import jp.ken.springbootapi.exception.CustomException;
 import jp.ken.springbootapi.exception.GlobalErrorResponse;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -32,6 +33,10 @@ public class GlobalErrorController implements ErrorController {
         Throwable e = (Throwable) request.getAttribute("javax.servlet.error.exception");
         Exception ex = (Exception) request.getAttribute("org.springframework.boot.web.servlet.error.DefaultErrorAttributes.ERROR");
         GlobalErrorResponse errorResponse = new GlobalErrorResponse("E500", ex.getClass().getSimpleName());
+        if(ex instanceof CustomException) {
+            CustomException c = (CustomException) ex;
+            log.info(c.getErrorMessage());
+        }
         log.info(ex.getClass().getName());
         log.info(ex.getClass().getCanonicalName());
         log.info(ex.getClass().getSimpleName());
