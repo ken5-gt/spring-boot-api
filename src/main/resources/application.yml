@@ -4,3 +4,14 @@
 #spring:
 #  mvc:
 #    throw-exception-if-no-handler-found: true
+spring:
+  datasource:
+    driver-class-name: org.h2.Driver
+    url: jdbc:h2:mem:testdb;IGNORECASE=TRUE;DB_CLOSE_ON_EXIT=TRUE;MODE=MySQL
+    username: sa
+    password:
+  h2:
+    console:
+      enabled: true
+mybatis:
+  mapper-locations: classpath*:/mapper/**/*.xml
